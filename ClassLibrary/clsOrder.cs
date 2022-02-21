@@ -11,5 +11,6 @@ namespace ClassLibrary
         public bool OrderDelivery { get; set; }
         public string OrderAddress { get; set; }
         public string OrderReturn { get; set; }
+        public bool Active { get; set; }
     }
 }
