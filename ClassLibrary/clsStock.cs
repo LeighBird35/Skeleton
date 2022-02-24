@@ -108,16 +108,32 @@ namespace ClassLibrary
 
         public bool Find(int bookId)
         {
-            //set private data members to the test data value
-            mbookId = 3;
-            mbookSearches = "Fantasy, L.Bardugo";
-            mbookDescription = "Six Of Crows";
-            mprice = 17.40;
-            mavailable = true;
-            mdayAdded = Convert.ToDateTime("17/02/2022");
-            
-            //always return true
-            return true;
+            //create an instance of the data connection
+            clsDataConnection DB = new clsDataConnection();
+            //add a parameter for the bookId to search for
+            DB.AddParameter("@bookId", bookId);
+            //execute the stored procedure
+            DB.Execute("sproc_tblStock_FilterBybookId");
+            //if only one record is found (there should be one or 0)
+            if (DB.Count == 1)
+            {
+                //copy the data from the database to the private data members
+                mbookId = Convert.ToInt32(DB.DataTable.Rows[0]["bookId"]);
+                mbookSearches = Convert.ToString(DB.DataTable.Rows[0]["bookSearches"]);
+                mbookDescription = Convert.ToString(DB.DataTable.Rows[0]["bookDescription"]);
+                mprice = Convert.ToDouble(DB.DataTable.Rows[0]["price"]);
+                mavailable = Convert.ToBoolean(DB.DataTable.Rows[0]["available"]);
+                mdayAdded = Convert.ToDateTime(DB.DataTable.Rows[0]["dayAdded"]);
+                //return that everything worked OK
+                return true;
+            }
+            //if no record was found
+            else
+            {
+                //return false indicating a problem
+                return false;
+            }
+
         }
     }
 }
