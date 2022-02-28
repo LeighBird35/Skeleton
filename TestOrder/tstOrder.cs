@@ -1,6 +1,7 @@
 ﻿using ClassLibrary;
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestOrder;
 
 namespace Testing6
 {
@@ -94,15 +95,16 @@ namespace Testing6
            Assert.AreEqual(AnOrder.OrderAddress, TestData);
         }
 
-        //[TestMethod]
-        //public void OrderReturnOK()
-        //{ 
-        //   //create an instance of the class we want to create
-        //   clsOrder AnOrder = new clsOrder();
-        //   //assign the data to the property
-        //   AnOrder.OrderReturn = TestData;
-        //   //test to see that the two values are the same
-        //   Assert.AreEqual(AnOrder.OrderReturn, TestData);
-        //}
+        [TestMethod]
+        public void OrderReturnOK()
+        { 
+           //create an instance of the class we want to create
+           clsOrder AnOrder = new clsOrder();
+           //assign the data to the property
+           AnOrder.OrderReturn = TestData;
+           //test to see that the two values are the same
+           Assert.AreEqual(AnOrder.OrderReturn, TestData);
+        }
     }
 }
+
