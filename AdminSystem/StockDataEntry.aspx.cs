@@ -20,19 +20,34 @@ public partial class _1_DataEntry : System.Web.UI.Page
         clsStock aStock = new clsStock();
 
         //capture the data
-        aStock.bookId = Convert.ToInt32(txtbookId.Text);
-        aStock.bookSearches = txtbookSearches.Text;
-        aStock.bookDescription = txtbookDescription.Text;
-        aStock.price = Convert.ToDouble(txtprice.Text);
-        aStock.dayAdded = Convert.ToDateTime(txtdayAdded.Text);
-        aStock.available = chkavailable.Checked;
-        
-        
-        //store the data in the session object
-        Session["aStock"] = aStock;
-        //navigate to the user page
-        Response.Redirect("StockViewer.aspx");
+        string bookSearches = txtbookSearches.Text;
+        string bookDescription = txtbookDescription.Text;
+        string price = txtprice.Text;
+        string dayAdded = txtdayAdded.Text;
 
+        //variable to store any errors
+        string Error = "";
+
+        //validate data
+        Error = aStock.Valid(bookSearches, bookDescription, price, dayAdded);
+        if (Error == "")
+        {
+            //capture data
+            aStock.bookSearches = bookSearches;
+            aStock.bookDescription = bookDescription;
+            aStock.price = Convert.ToDouble(price);
+            aStock.dayAdded = Convert.ToDateTime(dayAdded);
+
+            //store the data in the session object
+            Session["aStock"] = aStock;
+            //navigate to the user page
+            Response.Write("StockViewer.aspx");
+        }
+        else
+        {
+            //display the error message
+            lblError.Text = Error;
+        }
     }
 
     protected void btnFind_Click(object sender, EventArgs e)
