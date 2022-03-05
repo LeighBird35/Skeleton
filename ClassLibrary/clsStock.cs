@@ -135,5 +135,97 @@ namespace ClassLibrary
             }
 
         }
+
+        public string Valid(string bookSearches, string bookDescription, string price, string dayAdded)
+        {
+            //create a sring variable to store the error
+            String Error = "";
+            //create a temp variable to store date values
+            DateTime DateTemp;
+            Double TestPrice;
+
+            //----------book searches-------------
+
+            //if the bookSearches is blank
+            if (bookSearches.Length == 0)
+            {
+                //record the error
+                Error = Error + "The Search Parameters must not be blank : ";
+            }
+
+            if (bookSearches.Length > 10000)
+            {
+                Error = Error + "The Search Parameters must be less than 10,000 characters :";
+            }
+
+            //----------book description--------------
+            //is bookDescriptions blank
+            if (bookDescription.Length == 0)
+            {
+                //record the error
+                Error = Error + "The title must not be blank : ";
+            }
+
+            if (bookDescription.Length > 10000)
+            {
+                Error = Error + "The title must be less than 10,000 characters :";
+            }
+
+            //----------------price-----------------           
+            try
+            {
+                TestPrice = Convert.ToDouble(price);
+                //is price blank
+                if (TestPrice == 0.00)
+                {
+                    //record the error
+                    Error = Error + "The price may not be blank : ";
+                }
+
+                if (TestPrice > 1000000.00)
+                {
+                    //record the error
+                    Error = Error + "The price must be less than £10,000,00 : ";
+                }
+            }
+
+            catch
+            {
+                //record the error
+                Error = Error + "The price was not valid";
+            }
+        
+
+
+            //------------------day added---------------
+
+            try
+            {
+
+                //copy the daYAdded value to the DateTemp cariable
+                DateTemp = Convert.ToDateTime(dayAdded);
+                if (DateTemp < DateTime.Now.Date)
+                {
+                    //record the error
+                    Error = Error + "The date cannot be in the past : ";
+                }
+
+                //check to see if the date is greater than today's date
+                if (DateTemp > DateTime.Now.Date)
+                {
+                    //record the error
+                    Error = Error + "The date cannot be in the future : ";
+                }
+
+            }
+            catch
+            {
+                //record the error
+                Error = Error + "The date was not a valid date";
+            }
+
+            //return any error message
+            return Error;
+        }
     }
 }
