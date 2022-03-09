@@ -23,14 +23,38 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //capture other order data
         AnOrder.OrderAddress = txtOrderAddress.Text;
         AnOrder.OrderReturn = txtOrderReturn.Text;
-        AnOrder.OrderSearch = Convert.ToBoolean(txtOrderSearch.Text);
+        //AnOrder.OrderSearch = Convert.ToBoolean(txtOrderSearch.Text);
         AnOrder.OrderDelivery = Convert.ToBoolean(txtOrderDelivery.Text);
-        AnOrder.DateAdded = Convert.ToDateTime(txtOrderDate.Text);
+        AnOrder.OrderDate = Convert.ToDateTime(txtOrderDate.Text);
 
         //store the order number in the session object
         Session["AnOrder"] = AnOrder;
 
         //navigate to the viewer page
         Response.Redirect("OrderDataEntry.aspx");
+    }
+
+    protected void btnFind_Click(object sender, EventArgs e)
+    {
+        //create an instance of the order class
+        clsOrder AnOrder = new clsOrder();
+        //variable to store the primary key
+        Int32 OrderID;
+        //variable to store the result of the find operation
+        Boolean Found = false;
+        //get the primary key entered by the user
+        OrderID = Convert.ToInt32(txtOrderID.Text);
+        //find the record
+        Found = AnOrder.Find(OrderID);
+        //if found
+        if (Found == true)
+        {
+            //display the values of the properties in the form
+            txtOrderAddress.Text = AnOrder.OrderAddress;
+            txtOrderReturn.Text = AnOrder.OrderReturn;
+            txtOrderSearch.Text = AnOrder.OrderSearch.ToString();
+            txtOrderDelivery.Text = AnOrder.OrderDelivery.ToString();
+            txtOrderDate.Text = AnOrder.OrderDate.ToString();
+        }
     }
 }
