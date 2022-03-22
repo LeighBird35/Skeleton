@@ -91,7 +91,7 @@ namespace Testing2
             //boolean variable to record if data is OK (assuming it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 customerNo = 123;
+            Int32 customerNo = 1;
             //invoke the method
             Found = AnCustomer.Find(customerNo);
             //check the customer no
@@ -113,7 +113,7 @@ namespace Testing2
             //boolean varaible to record if data is OK (assuming it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 customerNo = 123;
+            Int32 customerNo = 2;
             //invoke the method
             Found = AnCustomer.Find(customerNo);
             //check the name
@@ -135,11 +135,11 @@ namespace Testing2
             //boolean variable to record if data is OK (assuming it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 customerNo = 123;
+            Int32 customerNo = 3;
             //invoke the method
             Found = AnCustomer.Find(customerNo);
             //check the address
-            if (AnCustomer.customerAddress != Convert.ToString("10 Cloverfield Lane"))
+            if (AnCustomer.customerAddress != Convert.ToString("52 Somewhere Road"))
             {
                 OK = false;
             }
@@ -157,7 +157,7 @@ namespace Testing2
             //boolean variable to record if data is OK (assuming it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 customerNo = 123;
+            Int32 customerNo = 1;
             //invoke the method
             Found = AnCustomer.Find(customerNo);
             //check if account exists
@@ -179,11 +179,11 @@ namespace Testing2
             //boolean variable to record if data is OK (assuming it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 customerNo = 123;
+            Int32 customerNo = 1;
             //invoke the method
             Found = AnCustomer.Find(customerNo);
             //check account creation date
-            if (AnCustomer.creationDate != Convert.ToDateTime("02/02/2022"))
+            if (AnCustomer.creationDate != Convert.ToDateTime("08/02/2022"))
             {
                 OK = false;
             }
