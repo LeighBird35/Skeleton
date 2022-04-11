@@ -1,7 +1,6 @@
 ﻿using ClassLibrary;
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TestOrder;
 
 
 namespace Testing6
@@ -32,16 +31,16 @@ namespace Testing6
         }
 
         [TestMethod]
-        public void DateAddedOK()
+        public void OrderDateOK()
         {
             //create an instance of the class we want to create
             clsOrder AnOrder = new clsOrder();
             //create some test data to assign tot the property
             DateTime TestData = DateTime.Now.Date;
             //assign the data to the property
-            AnOrder.DateAdded = TestData;
+            AnOrder.OrderDate = TestData;
             //test to see that the two values are the same
-            Assert.AreEqual(AnOrder.DateAdded, TestData);
+            Assert.AreEqual(AnOrder.OrderDate, TestData);
         }
 
         [TestMethod]
@@ -104,7 +103,7 @@ namespace Testing6
             //assign the data to the property
             AnOrder.OrderReturn = TestData;
             //test to see that the two values are the same
-            Assert.AreEqual(AnOrder.OrderReturn, TestData);
+            Assert.AreEqual(AnOrder.OrderReturn, testData);
         }
 
         //------------Found test------------
@@ -180,7 +179,7 @@ namespace Testing6
             //invoke the method
             Found = AnOrder.Find(OrderID);
             //check the property
-            if (AnOrder.OrderDelivery != Convert.ToString("The two kings Crown"))
+            if (AnOrder.OrderDelivery =! Convert.ToString("The two kings Crown"))
             {
                 OK = false;
             }
@@ -201,7 +200,7 @@ namespace Testing6
             //invoke the method
             Found = AnOrder.Find(OrderID);
             //check the property
-            if (AnOrder.OrderReturn != Convert.ToString("Addicted, Test Towm")
+            if (AnOrder.OrderReturn != Convert.ToString("Addicted, Test Towm");
             {
                 OK = false;
             }
@@ -400,11 +399,11 @@ namespace Testing6
 
         //-------------OrderSearch------------
 
-        TestMethod]
+        [TestMethod]
         public void OrderSearchMinLessOne()
         {
             //create class instance
-            clsOrder AnOrder = new AnOrder();
+            clsOrder AnOrder = new clsOrder();
             //srting variable to store an error message
             String Error = "";
             //create some test data to pass to the method
@@ -454,7 +453,7 @@ namespace Testing6
             String Error = "";
             //create some test data to pass to the method
             string OrderSearch = "";
-            OrderSearch = OrderSearh.PadRight(10000, 'a');
+            OrderSearch = OrderSearch.PadRight(10000, 'a');
             //invoke the method
             Error = AnOrder.Valid(OrderSearch, OrderReturn, OrderAddress, OrderDate);
             //test to see that the result is correct
@@ -684,11 +683,4 @@ namespace Testing6
         }
     }
 }
-
-
- 
-
-
-    
-
 

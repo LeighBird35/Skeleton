@@ -23,10 +23,55 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //create a new instance of clsOrder
         clsOrder AnOrder = new clsOrder();
         //capture the order number
-        AnOrder.OrderID = txtOrderID.Text;
-        //store the address in the session object
-        Session["AnOrder"] = AnOrder;
-        //navigate to the viewer page
-        Response.Redirect("OrderDataEntry.aspx");
+        string OrderID = txtOrderID.Text;
+        //capture the order search
+        string OrderSearch = txtOrderSearch.Text;
+        //capture the order delivery
+        string OrderDelivery = txtOrderDelivery.Text;
+        //capture the order address
+        string OrderAddress = txtOrderAddress.Text;
+        //capture the order return
+        //string OrderReturn = txtOrderReturn.Text;
+        //capture the order date
+        string OrderDate = txtOrderDate.Text;
+        //varaible to store any error messages
+        string Error = "";
+        //validate the data
+        Error = AnOrder.Valid(OrderID, OrderAddress, OrderDelivery, OrderSearch,OrderDate, //OrderReturn);
+        if (Error == "")
+        {
+            //capture the order id
+            AnOrder.OrderID = Convert.ToInt32 ( OrderID);
+            //capture the address
+            AnOrder.OrderAddress = OrderAddress;
+            //capture the search
+            AnOrder.OrderSearch = Convert.ToBoolean (OrderSearch);
+            //capture the delivery
+            AnOrder.OrderDelivery = Convert.ToBoolean(OrderDelivery);
+            //CAPTURE THE RETURN
+            AnOrder.OrderReturn = Convert.ToString( OrderReturn);
+            //capture the date
+            AnOrder.OrderDate = Convert.ToDateTime(OrderDate);
+
+        
+             //store the address in the session object
+             Session["AnOrder"] = AnOrder;
+             //navigate to the viewer page
+             Response.Redirect("OrderDataEntry.aspx");
+        }
+        else
+         {
+            //display the error message
+            lblError.Text = Error;
+
+        }
+
+
+    protected void btnFind_Click(object sender, EventArgs e)
+    {
+
     }
-}
+
+
+
+
