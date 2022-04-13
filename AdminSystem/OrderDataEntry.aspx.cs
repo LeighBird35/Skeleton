@@ -31,46 +31,71 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //capture the order address
         string OrderAddress = txtOrderAddress.Text;
         //capture the order return
-        //string OrderReturn = txtOrderReturn.Text;
+        string OrderReturn = txtOrderReturn.Text;
         //capture the order date
         string OrderDate = txtOrderDate.Text;
         //varaible to store any error messages
         string Error = "";
         //validate the data
-        Error = AnOrder.Valid(OrderID, OrderAddress, OrderDelivery, OrderSearch,OrderDate, //OrderReturn);
+        Error = AnOrder.Valid(OrderID, OrderAddress, OrderDelivery, OrderSearch, OrderDate, OrderReturn);
         if (Error == "")
         {
             //capture the order id
-            AnOrder.OrderID = Convert.ToInt32 ( OrderID);
+            AnOrder.OrderID = Convert.ToInt32(OrderID);
             //capture the address
-            AnOrder.OrderAddress = OrderAddress;
+            AnOrder.OrderAddress = Convert.ToString(OrderAddress);
             //capture the search
-            AnOrder.OrderSearch = Convert.ToBoolean (OrderSearch);
+            AnOrder.OrderSearch = Convert.ToBoolean(OrderSearch);
             //capture the delivery
             AnOrder.OrderDelivery = Convert.ToBoolean(OrderDelivery);
             //CAPTURE THE RETURN
-            AnOrder.OrderReturn = Convert.ToString( OrderReturn);
+            AnOrder.OrderReturn = Convert.ToString(OrderReturn);
             //capture the date
             AnOrder.OrderDate = Convert.ToDateTime(OrderDate);
 
-        
-             //store the address in the session object
-             Session["AnOrder"] = AnOrder;
-             //navigate to the viewer page
-             Response.Redirect("OrderDataEntry.aspx");
+
+            //store the address in the session object
+            Session["AnOrder"] = AnOrder;
+            //navigate to the viewer page
+            Response.Redirect("OrderDataEntry.aspx");
         }
         else
-         {
+        {
             //display the error message
             lblError.Text = Error;
 
         }
 
 
-    protected void btnFind_Click(object sender, EventArgs e)
-    {
 
     }
+
+    protected void btnFind_Click(object sender, EventArgs e)
+    {
+        //create an instance of the order class
+        clsOrder AnOrder = new clsOrder();
+        //variable to store the primary key
+        Int32 OrderID;
+        //varaible to store the result of the find operation
+        Boolean Found = false;
+        //get the primary key entered by the user
+        OrderID = Convert.ToInt32(txtOrderID.Text);
+        //find the record
+        Found = AnOrder.Find(OrderID);
+        //if found
+        if (Found == true)
+        {
+            //display the values of the properties in the form
+            txtOrderReturn.Text = AnOrder.OrderReturn;
+            txtOrderSearch.Text = AnOrder.OrderSearch.ToString();
+            txtOrderDelivery.Text = AnOrder.OrderDelivery.ToString();
+            txtOrderAddress.Text = AnOrder.OrderAddress;
+            txtOrderDate.Text = AnOrder.OrderDate.ToString();
+
+        }
+    }
+}
+
 
 
 

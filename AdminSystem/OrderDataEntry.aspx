@@ -29,7 +29,7 @@
             <br />
             <br />
             <asp:Label ID="lblOrderReturn" runat="server" Text="Return Address" width="91px"></asp:Label>
-&nbsp;<asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+&nbsp;<asp:TextBox ID="txtOrderReturn" runat="server"></asp:TextBox>
             <br />
             <br />
             <asp:Label ID="lblOrderDate" runat="server" Text="Date" width="91px"></asp:Label>
