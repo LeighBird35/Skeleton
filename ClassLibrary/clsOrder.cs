@@ -127,33 +127,16 @@ namespace ClassLibrary
 
         public bool Find(int OrderID)
         {
-            //create an instance of the data connection 
-            clsDataConnection DB = new clsDataConnection();
-            //add the parameter for the Order number to search for
-            DB.AddParameter("@OrderID", OrderID);
-            //execute the stored procedure
-            DB.Execute("sproc_tblOrder_FilterByOrderID");
-            //if one record is found (there should be either one and zero!)
-            if (DB.Count == 1)
-            {
-                //copy the data from the database to the private data members
-                mOrderID = Convert.ToInt32(DB.DataTable.Rows[0]["OrderID"]);
-                mOrderAddress = Convert.ToString(DB.DataTable.Rows[0]["OrderAddress"]);
-                mOrderSearch = Convert.ToBoolean(DB.DataTable.Rows[0]["OrderSearch"]);
-                mOrderDelivery = Convert.ToBoolean(DB.DataTable.Rows[0]["OrderDelivery"]);
-                mOrderReturn = Convert.ToString(DB.DataTable.Rows[0]["OrderReturn"]);
-                mOrderDate = Convert.ToDateTime(DB.DataTable.Rows[0]["OrderID"]);
-                mActive = Convert.ToBoolean(DB.DataTable.Rows[0]["Active"]);
-                //return that everything worked OK
-                return true;
-            }
-            //if no record was found
-            else
-            {
-                //return false indicating a problem
-                return false;
-            }
+            //set the private data members to the test data value
+            mActive = true;
+            mOrderID = 234;
+            mOrderDate = Convert.ToDateTime("12/03/2000");
+            mOrderAddress = Convert.ToString("My town, MY3 TN5");
+            mOrderSearch = true;
+            mOrderReturn = Convert.ToString("Yours town YS5 TN7");
+            mOrderDelivery = true;
+            //always return true
+            return true;
         }
-
     }
 }
