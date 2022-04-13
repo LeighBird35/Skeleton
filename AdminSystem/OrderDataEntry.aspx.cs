@@ -13,7 +13,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             
     }
 
-    protected void btnOK_Click(object sender, EventArgs e)
+    protected void BtnOK_Click(object sender, EventArgs e)
     {
         //create a new instance of clsOrder
         clsOrder AnOrder = new clsOrder();
@@ -23,7 +23,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //capture other order data
         AnOrder.OrderAddress = txtOrderAddress.Text;
         AnOrder.OrderReturn = txtOrderReturn.Text;
-        //AnOrder.OrderSearch = Convert.ToBoolean(txtOrderSearch.Text);
+        AnOrder.OrderSearch = Convert.ToBoolean(txtOrderSearch.Text);
         AnOrder.OrderDelivery = Convert.ToBoolean(txtOrderDelivery.Text);
         AnOrder.OrderDate = Convert.ToDateTime(txtOrderDate.Text);
 

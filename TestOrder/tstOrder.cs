@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Testing6
 {
     [TestClass]
-    public class tstOrder
+    public class TstOrder
     {
         [TestMethod]
         public void InstanceOK()
@@ -15,6 +15,7 @@ namespace Testing6
             //test to see that it exists
             Assert.IsNotNull(AnOrder);
         }
+
 
         [TestMethod]
         public void ActivePropertyOK()
@@ -37,9 +38,9 @@ namespace Testing6
             //create some test data to assign tot the property
             DateTime TestData = DateTime.Now.Date;
             //assign the data to the property
-            AnOrder.DateAdded = TestData;
+            AnOrder.OrderDate = TestData;
             //test to see that the two values are the same
-            Assert.AreEqual(AnOrder.DateAdded, TestData);
+            Assert.AreEqual(AnOrder.OrderDate, TestData);
         }
 
         [TestMethod]
@@ -99,6 +100,8 @@ namespace Testing6
         {
             //create an instance of the class we want to create
             clsOrder AnOrder = new clsOrder();
+            //create some test data to assign to the property
+            String TestData = "M.K Millions";
             //assign the data to the property
             AnOrder.OrderReturn = TestData;
             //test to see that the two values are the same
@@ -121,6 +124,7 @@ namespace Testing6
             //test to see if the result is true
             Assert.IsTrue(Found);
         }
+
         [TestMethod]
         public void TestOrderIDFound()
         {
@@ -142,7 +146,32 @@ namespace Testing6
             //test to see that the result is correct
             Assert.IsTrue(OK);
 
+
         }
+
+        [TestMethod]
+        public void TestOrderDateFound()
+        {
+            //create an instance of the class we want to create
+            clsOrder AnOrder = new clsOrder();
+            //boolean variable to store the result of the search
+            Boolean Found = false;
+            //boolean variable to record if data is OK(assume it is)
+            Boolean OK = true;
+            //create some test data to use with the method
+            Int32 OrderID = 234;
+            //invoke the mehod
+            Found = AnOrder.Find(OrderID);
+            //check the property
+            if (AnOrder.OrderDate != Convert.ToDateTime("12/03/2000"))
+            {
+                OK = false;
+            }
+            //test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
+
+
         [TestMethod]
         public void TestOrderSearchFound()
         {
@@ -164,6 +193,8 @@ namespace Testing6
             //test to see that the result is correct
             Assert.IsTrue(OK);
         }
+
+
         [TestMethod]
         public void TestOrderDeliveryFound()
         {
@@ -178,13 +209,16 @@ namespace Testing6
             //invoke the method
             Found = AnOrder.Find(OrderID);
             //check the property
-            if (AnOrder.OrderDelivery != Convert.ToString("The two kings Crown"))
+            if (AnOrder.OrderDelivery != true)
             {
                 OK = false;
             }
             //test to see that the result is correct
             Assert.IsTrue(OK);
         }
+
+
+
         [TestMethod]
         public void TestOrderReturnFound()
         {
@@ -199,13 +233,14 @@ namespace Testing6
             //invoke the method
             Found = AnOrder.Find(OrderID);
             //check the property
-            if (AnOrder.OrderReturn != Convert.ToString("Addicted, Test Towm")
+            if (AnOrder.OrderReturn != Convert.ToString("My town, MY3 TN7"))
             {
                 OK = false;
             }
             //test to see that the result is correct
             Assert.IsTrue(OK);
         }
+
         [TestMethod]
         public void TestOrderAddressFound()
         {
@@ -220,34 +255,14 @@ namespace Testing6
             //invoke the method
             Found = AnOrder.Find(OrderID);
             //check the property
-            if (AnOrder.OrderAddress != )
+            if (AnOrder.OrderAddress != Convert.ToString("Yours town, YS3,MN4"))
             {
                 OK = false;
             }
             //test to see that the result is correct
             Assert.IsTrue(OK);
         }
-        [TestMethod]
-        public void TestOrderDateFound()
-        {
-            //create an instance of the class we want to create
-            clsOrder AnOrder = new clsOrder();
-            //boolean variable to store the result of the search
-            Boolean Found = false;
-            //boolean variable to record if data is OK(assume it is)
-            Boolean OK = true;
-            //create some test data to use with the method
-            Int32 OrderID = 234;
-            //invoke the mehod
-            Found = AnOrder.Find(AnOrder);
-            //check the property
-            if (AnOrder.OrderDate != Convert.ToDateTime("12/03/2000"))
-            {
-                OK = false;
-            }
-            //test to see that the result is correct
-            Assert.IsTrue(OK);
-        }
+
         [TestMethod]
         public void TestActiveFound()
         {
