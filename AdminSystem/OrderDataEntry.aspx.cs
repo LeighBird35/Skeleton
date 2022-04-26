@@ -18,20 +18,48 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //create a new instance of clsOrder
         clsOrder AnOrder = new clsOrder();
         //capture the order number
-        AnOrder.OrderID = Convert.ToInt32(txtOrderID.Text);
+        string OrderID = txtOrderID.Text;
+        //capture the order delivery
+        string OrderDelivery = txtOrderDelivery.Text;
+        //capture the order address
+        string OrderAddress = txtOrderAddress.Text;
+        //capture the order return
+        string OrderReturn = txtOrderReturn.Text;
+        //capture the order serach
+        string OrderSearch = txtOrderSearch.Text;
+        //capture the order date
+        string OrderDate = txtOrderDate.Text;
+        //variable to store any error messages
+        string Error = "";
+        //validate the data 
+        Error = AnOrder.Valid(OrderID, OrderSearch, OrderDelivery, OrderAddress, OrderDate);
+        if (Error == "")
+        {
+            //capture the order number
+            AnOrder.OrderID = Convert.ToInt32(OrderID);
+            //capture the delivery
+            AnOrder.OrderDelivery = Convert.ToBoolean(OrderDelivery);
+            //capture the address
+            AnOrder.OrderAddress = OrderAddress;
+            //capture the return 
+            AnOrder.OrderReturn = OrderReturn;
+            //capture the order search
+            AnOrder.OrderSearch = Convert.ToBoolean(OrderSearch);
+            //capture the order date
+            AnOrder.OrderDate = Convert.ToDateTime(OrderDate);
 
-        //capture other order data
-        AnOrder.OrderAddress = txtOrderAddress.Text;
-        AnOrder.OrderReturn = txtOrderReturn.Text;
-        //AnOrder.OrderSearch = Convert.ToBoolean(txtOrderSearch.Text);
-        AnOrder.OrderDelivery = Convert.ToBoolean(txtOrderDelivery.Text);
-        AnOrder.OrderDate = Convert.ToDateTime(txtOrderDate.Text);
 
-        //store the order number in the session object
-        Session["AnOrder"] = AnOrder;
+            //store the order number in the session object
+            Session["AnOrder"] = AnOrder;
 
-        //navigate to the viewer page
-        Response.Redirect("OrderDataEntry.aspx");
+            //navigate to the viewer page
+            Response.Redirect("OrderDataEntry.aspx");
+        }
+        else
+        {
+            //display the error messgae
+            lblError.Text = Error; 
+        }
     }
 
     protected void btnFind_Click(object sender, EventArgs e)
