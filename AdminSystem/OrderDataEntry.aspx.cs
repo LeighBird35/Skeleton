@@ -13,7 +13,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             
     }
 
-    protected void btnOK_Click(object sender, EventArgs e)
+    protected void BtnOK_Click(object sender, EventArgs e)
     {
         //create a new instance of clsOrder
         clsOrder AnOrder = new clsOrder();
@@ -47,6 +47,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             AnOrder.OrderSearch = Convert.ToBoolean(OrderSearch);
             //capture the order date
             AnOrder.OrderDate = Convert.ToDateTime(OrderDate);
+
 
 
             //store the order number in the session object
@@ -85,4 +86,6 @@ public partial class _1_DataEntry : System.Web.UI.Page
             txtOrderDate.Text = AnOrder.OrderDate.ToString();
         }
     }
+
+  
 }

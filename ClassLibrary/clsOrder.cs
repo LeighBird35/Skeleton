@@ -4,7 +4,7 @@ namespace ClassLibrary
 {
     public class clsOrder
     {
-        
+
         //private data member for the order number property
         private Boolean mActive;
         //OrderID public property
@@ -126,6 +126,7 @@ namespace ClassLibrary
 
         public bool Find(int OrderID)
         {
+ 
             //create an instance of the data connection 
             clsDataConnection DB = new clsDataConnection();
             //add the parameter for the Order number to search for
@@ -266,5 +267,18 @@ namespace ClassLibrary
         {
             throw new NotImplementedException();
         }
+
+            //set the private data members to the test data value
+            mOrderID = 234;
+            mOrderDate = Convert.ToDateTime("12/03/2000");
+            mOrderDelivery = true;
+            mOrderSearch = true;
+            mOrderReturn = Convert.ToString("My town, MY3 TN7");
+            mOrderAddress = Convert.ToString("Yours town, YS3,MN4");
+            mActive = true;
+            //always return value
+            return true;
+        }
+
     }
 }
