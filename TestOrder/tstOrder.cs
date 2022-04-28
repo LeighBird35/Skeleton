@@ -1,12 +1,14 @@
 ﻿using ClassLibrary;
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+using TestOrder;
+using NUnit.Framework;
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace Testing6
 {
     [TestClass]
-    public class TstOrder
+    public class TestOrder
     {
         [TestMethod]
         public void InstanceOK()
@@ -101,12 +103,12 @@ namespace Testing6
         {
             //create an instance of the class we want to create
             clsOrder AnOrder = new clsOrder();
-
-            {
-                OK = false;
-            }
+            //create some test data to assign to the property
+            String TestData = "Millions, M.Kudu";
+            //assign the data to the property
+            AnOrder.OrderReturn = TestData;
             //test to see that the result is correct
-            Assert.IsTrue(OK);
+            Assert.AreEqual(AnOrder.OrderReturn, TestData);
         }
 
 
@@ -124,10 +126,7 @@ namespace Testing6
             //invoke the method
             Found = AnOrder.Find(OrderID);
             //check the property
-
-           
-          
-
+            if(AnOrder.OrderDelivery != true)
             {
                 OK = false;
             }
@@ -151,7 +150,7 @@ namespace Testing6
             //invoke the method
             Found = AnOrder.Find(OrderID);
             //check the property
-
+            if(AnOrder.OrderReturn != Convert.ToString("My town, MY5 TN7"))
             {
                 OK = false;
             }
@@ -170,10 +169,10 @@ namespace Testing6
             Boolean OK = true;
             //create some test data to use with the method
             Int32 OrderID = 234;
-
+            //invoke the method
             Found = AnOrder.Find(OrderID);
             //check the property
-            if (AnOrder.OrderAddress != Convert.ToString("Yours town, YS3,MN4"))
+            if (AnOrder.OrderAddress != Convert.ToString("Yours Town, YS5 TN9"))
             {
                 OK = false;
             }
@@ -482,8 +481,21 @@ namespace Testing6
     }
 }
 
+namespace TestOrder
+{
+    class TestClass
+    {
+    }
 
+    class TestMethod
+    {
+    }
 
-    
+    internal class TestMethod
+    {
+    }
 
-
+    public class TestMethod
+    {
+    }
+}

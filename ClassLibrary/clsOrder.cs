@@ -1,4 +1,5 @@
 ﻿using System;
+using ClassLibrary;
 
 namespace ClassLibrary
 {
@@ -159,6 +160,7 @@ namespace ClassLibrary
 
         public string Valid(string OrderID, string OrderAddress, string OrderReturn, string OrderSearch, string OrderDate, string OrderDelivery)
         {
+
             //create a string variable to store the errors
             String Error = "";
             //create a temporary variable to store data values
@@ -263,22 +265,11 @@ namespace ClassLibrary
             return Error;
         }
 
-        public string Valid(object orderID, object orderSearch, object orderDelivery, object orderAddress, string orderDate)
-        {
-            throw new NotImplementedException();
-        }
+       
 
-            //set the private data members to the test data value
-            mOrderID = 234;
-            mOrderDate = Convert.ToDateTime("12/03/2000");
-            mOrderDelivery = true;
-            mOrderSearch = true;
-            mOrderReturn = Convert.ToString("My town, MY3 TN7");
-            mOrderAddress = Convert.ToString("Yours town, YS3,MN4");
-            mActive = true;
-            //always return value
-            return true;
-        }
+         
+         
+        
 
     }
 }
