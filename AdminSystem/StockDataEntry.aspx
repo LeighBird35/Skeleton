@@ -8,7 +8,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <asp:Label ID="bookId" runat="server" Text="Book ID" width="99px"></asp:Label>
+        <asp:Label ID="lblbookid" runat="server" Text="Book ID" width="99px"></asp:Label>
         <asp:TextBox ID="txtbookId" runat="server"></asp:TextBox>
         <asp:Button ID="btnFind" runat="server" OnClick="btnFind_Click" Text="Find" />
         <p>
