@@ -194,38 +194,38 @@ namespace Test_Framework
     }
 
     [TestMethod]
-    public void ReportByOrderSearchMethodOK()
+    public void ReportByOrderAddressMethodOK()
     {
         //create instance of the class containing unfiltered results
         clsOrderCollection AllOrder = new clsOrderCollection();
         //create an instanse of the filtered data
         clsOrderCollection FilteredOrder = new clsOrderCollection();
         //apply a blank strinf (should return all records)
-        FilteredOrder.ReportByOrderSearch("");
+        FilteredOrder.ReportByOrderAddress("");
         //test to see two values are the same
         Assert.AreEqual(AllOrder.Count, FilteredOrder.Count);
     }
 
     [TestMethod]
-    public void ReportByOrderSearchNoneFound()
+    public void ReportByOrderAddressNoneFound()
     {
         //create instance of filtered data
-        clsOrderCollection FilteredStock = new clsOrderCollection();
+        clsOrderCollection FilteredOrder = new clsOrderCollection();
         //apply a product that doesnt exist
-        FilteredOrder.ReportByOrderSearch(false);
+        FilteredOrder.ReportByOrderAddress(false);
         //test to see that there is no record
         Assert.AreEqual(0, FilteredOrder.Count);
     }
 
     [TestMethod]
-    public void ReportByOrderSearchTestDataFound()
+    public void ReportByOrderAddressTestDataFound()
     {
         //create an instance of the filterted data
         clsOrderCollection FilteredOrder = new clsOrderCollection();
         //var to store outcome
         Boolean OK = true;
         //apply a product that doesnt exist
-        FilteredOrder.ReportByOrderSearch(true);
+        FilteredOrder.ReportByOrderAddress(true);
         //check that the correct number of records are found
         if (FilteredOrder.Count == 1)
         {

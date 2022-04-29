@@ -36,10 +36,7 @@ namespace ClassLibrary
             }
         }
 
-        public void Delete()
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public clsOrder ThisOrder
         {
@@ -58,50 +55,44 @@ namespace ClassLibrary
         //comstructor for class
         public clsOrderCollection()
         {
-
-            
-
-                //onject for data connection
-                clsDataConnection DB = new clsDataConnection();
-                //execute the sttored procedure
-                DB.Execute("sproc_tblStock_SelectAll");
-                //populate
-                PopulateArray(DB);
-
-
-                //var for the index
-                Int32 Index = 0;
-            //var to store the record count
-            Int32 RecordCount = 0;
             //object for data connection
-           clsDataConnection DB = new clsDataConnection();
+            clsDataConnection DB = new clsDataConnection();
             //execute the stored procedure
-           DB.Execute("sproc_tblOrder_SelectAll");
-            //get the count of records
-           RecordCount = DB.Count;
+            DB.Execute("proc_tblOrder_SelectAll");
+            //populate the array list with the data table
+            PopulateArray(DB);
+
+            //var for the index
+            //  Int32 Index = 0;
+            //var to store the record count
+            //Int32 RecordCount = 0;
+            ////object for data connection
+            //clsDataConnection DB = new clsDataConnection();
+            // //execute the stored procedure
+            // DB.Execute("sproc_tblOrder_SelectAll");
+            ////get the count of records
+            //RecordCount = DB.Count;
             //while there are records to process
-            while (Index < RecordCount)
-            {
-               clsOrder AnOrder = new clsOrder();
-                //read in the fields from the current record
-                AnOrder.OrderID = Convert.ToInt32(DB.DataTable.Rows[Index]["OrderID"]);
-                AnOrder.OrderSearch = Convert.ToBoolean(DB.DataTable.Rows[Index]["OrderSearch"]);
-                AnOrder.OrderAddress = Convert.ToString(DB.DataTable.Rows[Index]["OrderAddress"]);
-                AnOrder.OrderReturn = Convert.ToString(DB.DataTable.Rows[Index]["OrderReturn"]);
-                AnOrder.OrderDelivery = Convert.ToBoolean(DB.DataTable.Rows[Index]["OrderDelivery"]);
-                AnOrder.OrderDate = Convert.ToDateTime(DB.DataTable.Rows[Index]["OrderDate"]);
-                //add the record to the private data member
-                mOrderList.Add(AnOrder);
-               //point to the next record
-                Index++;
-            }
-
-
+            //while (Index < RecordCount)
+            //{
+            // clsOrder AnOrder = new clsOrder();
+            //  //read in the fields from the current record
+            // AnOrder.OrderID = Convert.ToInt32(DB.DataTable.Rows[Index]["OrderID"]);
+            // AnOrder.OrderSearch = Convert.ToBoolean(DB.DataTable.Rows[Index]["OrderSearch"]);
+            //AnOrder.OrderAddress = Convert.ToString(DB.DataTable.Rows[Index]["OrderAddress"]);
+            // AnOrder.OrderReturn = Convert.ToString(DB.DataTable.Rows[Index]["OrderReturn"]);
+            // AnOrder.OrderDelivery = Convert.ToBoolean(DB.DataTable.Rows[Index]["OrderDelivery"]);
+            //AnOrder.OrderDate = Convert.ToDateTime(DB.DataTable.Rows[Index]["OrderDate"]);
+            //add the record to the private data member
+            // mOrderList.Add(AnOrder);
+            //point to the next record
+            // Index++;
+            // }
         }
-
-         void PopulateArray(clsDataConnection dB)
+        private void PopulateArray(clsDataConnection dB)
         {
-            //populates the array list based on the data table in the parameter DB
+         
+             //populates the array list based on the data table in the parameter DB
             //var for the index
             Int32 Index = 0;
             //var to store the record count
@@ -129,7 +120,15 @@ namespace ClassLibrary
                 Index++;
             }
 
-            public int Add()
+            
+            }
+
+        public void ReportByOrderAddress(object text)
+        {
+            throw new NotImplementedException();
+        }
+
+        int Add()
             {
                 //adds new record to the database based on the values of mThisStock
                 //connect to the database
@@ -146,7 +145,7 @@ namespace ClassLibrary
 
             }
 
-            public void Update()
+            void Update()
             {
                 //update an existing record based on the values of this address
                 //connect to the database
@@ -162,7 +161,7 @@ namespace ClassLibrary
                 DB.Execute("sproc_tblOrder_Update");
             }
 
-            public void Delete()
+            void Delete()
             {
                 //deletes the record pointed to by ThisStock
                 //connect to database
@@ -172,10 +171,23 @@ namespace ClassLibrary
                 //execute
                 DB.Execute("sproc_tblOrder_Delete");
             }
+         }
+
+
+         public void ReportByOrderAddress(string OrderAddress)
+        {
+            //filtered the records based on a full or partial post code
+            //connect to the database
+            clsDataConnection DB = new clsDataConnection();
+            //send the address parameter to the database
+            DB.AddParameter(OrderAddress, OrderAddress);
+            //execute the stored procedure
+            DB.Execute("sproc_tblOrder_FilteredByOrderAddress");
+            //populate the array list witht the data table
+            PopulateArray(DB);
         }
 
       
     }
 
    
-}

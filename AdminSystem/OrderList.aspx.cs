@@ -92,5 +92,19 @@ public partial class _1_List : System.Web.UI.Page
         }
     }
 
-    
+
+
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        //create an instance of the oder collection
+        clsOrderCollection Orders = new clsOrderCollection();
+        Orders.ReportByOrderAddress(txtFilter.Text);
+        lstOrderList.DataSource = Orders.OrderList;
+        //set the name of the firld to display
+        lstOrderList.DataValueField = "OrderID";
+        //set the name of the field to display
+        lstOrderList.DataTextField = "OrderAddress";
+        //bind the data to the list
+        lstOrderList.DataBind();
+    }
 }

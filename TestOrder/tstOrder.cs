@@ -481,21 +481,4 @@ namespace Testing6
     }
 }
 
-namespace TestOrder
-{
-    class TestClass
-    {
-    }
 
-    class TestMethod
-    {
-    }
-
-    internal class TestMethod
-    {
-    }
-
-    public class TestMethod
-    {
-    }
-}
