@@ -120,5 +120,56 @@ namespace ClassLibrary
                 return false;
             }
         }
+
+        public string Valid(string customerNo, string customerName, string customerAddress, string hasAccount, string creationDate)
+        {
+            //create a string variable to store the error
+            String Error = "";
+
+            //create a temp variable to store date values
+            DateTime DateTemp;
+
+            //if the customerNo is blank
+            if (customerNo.Length == 0)
+            {
+                //record the error
+                Error = Error + "The customer no may not be blank: ";
+            }
+
+            //if the customerNo is greater than 6 characters
+            if (customerNo.Length > 6)
+            {
+                //record the error
+                Error = Error + "The customer no must be less than 6 characters : ";
+            }
+
+
+
+            try
+            {
+                //copy the dateAdded value to the DateTemp variable
+                DateTemp = Convert.ToDateTime(creationDate);
+
+                if (DateTemp < DateTime.Now.Date)
+                {
+                    //record the error
+                    Error = Error + "The date cannot be in the past : ";
+                }
+
+                //check if the dateAdded valuve is greater than today's date
+                if (DateTemp > DateTime.Now.Date)
+                {
+                    //record the error
+                    Error = Error + "The date cannot be in the future : ";
+                }
+            }
+            catch
+            {
+                //record the error
+                Error = Error + "That was not a valid date : ";
+            }
+            //return any error messages
+            return Error;
+        }
     }
 }
