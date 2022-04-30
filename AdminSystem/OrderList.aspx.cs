@@ -28,7 +28,7 @@ public partial class _1_List : System.Web.UI.Page
     void DisplayOrders()
     {
         //create an instance of the orders collection
-        clsOrderCollection Order = new clsOrderCollection();
+        clsOrderCollections Order= new clsOrderCollections();
         //find the record to update
         Order.ThisOrder.Find(OrderID);
         //display the data for this record
@@ -97,7 +97,7 @@ public partial class _1_List : System.Web.UI.Page
     protected void btnClear_Click(object sender, EventArgs e)
     {
         //create an instance of the oder collection
-        clsOrderCollection Orders = new clsOrderCollection();
+        clsOrderCollections Orders = new clsOrderCollections();
         Orders.ReportByOrderAddress(txtFilter.Text);
         lstOrderList.DataSource = Orders.OrderList;
         //set the name of the firld to display

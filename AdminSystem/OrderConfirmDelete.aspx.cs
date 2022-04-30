@@ -20,7 +20,7 @@ public partial class _1_ConfirmDelete : System.Web.UI.Page
     protected void btnYes_Click(object sender, EventArgs e)
     {
         //create a new instance of the order class
-        clsOrderCollection Order = new clsOrderCollection();
+        clsOrderCollections Order = new clsOrderCollections();
         //find the record to delete
         Order.Delete();
         //redirect back to the main page

@@ -1,13 +1,17 @@
 ﻿using System;
-using ClassLibrary;
+using System.Text;
+using System.Linq;
+using System.Collections.Generic;
+
+
 
 namespace ClassLibrary
 {
     public class clsOrder
     {
-
-        //private data member for the order number property
-        private Boolean mActive;
+       
+            //private data member for the order number property
+            private Boolean mActive;
         //OrderID public property
         public bool Active
         {
@@ -38,6 +42,8 @@ namespace ClassLibrary
                 mOrderID = value;
             }
         }
+
+       
 
         //private data member for the OrderSearch property
         private Boolean mOrderSearch;
@@ -123,11 +129,16 @@ namespace ClassLibrary
                 //this line of code allows data into the property
                 mOrderReturn = value;
             }
-        }
 
-        public bool Find(int OrderID)
+        }
+    
+    
+
+       
+
+        public bool Find(int orderID)
         {
- 
+
             //create an instance of the data connection 
             clsDataConnection DB = new clsDataConnection();
             //add the parameter for the Order number to search for
@@ -155,36 +166,39 @@ namespace ClassLibrary
                 return false;
             }
 
-            
         }
 
-        public string Valid(string OrderID, string OrderAddress, string OrderReturn, string OrderSearch, string OrderDate, string OrderDelivery)
+        public string Valid(string orderID, string orderSearch, string orderDelivery, string orderAddress, string orderReturn, string orderDate)
         {
+            return "";
+        }
 
-            //create a string variable to store the errors
+        public string Valid(string orderSearch, string orderDelivery, string orderAddress, string orderReturn, string orderDate)
+        {
+            //create a string varaible to store the error
             String Error = "";
             //create a temporary variable to store data values
             DateTime DateTemp;
-                
-            //if the Order number is blank
-            if (OrderID.Length == 0)
+            //if the OrderAddress is blank
+            if (orderAddress.Length == 0)
             {
                 //record the error
-                Error = Error + "The order number may not be blank";
+                Error = Error + "The Order Address may not be blank : ";
             }
-            //if the order number is greater than 6 characters
-            if (OrderID.Length > 6)
+            //if the order address is greater than 6 characters
+            if (orderAddress.Length > 6)
             {
                 //record the error
-                Error = Error + "The order number must not be less than 6 characters:";
+                Error = Error + "The address must be less than 6 character ; ";
             }
-            //copy the dateadded values to the datetemp variable
-            DateTemp = Convert.ToDateTime(OrderDate);
+            //copy the orderdate value to the datetemp variable
+            DateTemp = Convert.ToDateTime(orderDate);
             if (DateTemp < DateTime.Now.Date)
             {
                 //record the error
                 Error = Error + "The date cannot be in the past :";
             }
+
             //check to see if the date is greater than today's date
             if (DateTemp > DateTime.Now.Date)
             {
@@ -194,7 +208,7 @@ namespace ClassLibrary
             try
             {
                 //copy the dateAdded value to the DateTemp variable
-                DateTemp = Convert.ToDateTime(OrderDate);
+                DateTemp = Convert.ToDateTime(orderDate);
                 if (DateTemp < DateTime.Now.Date)
                 {
                     //record the error
@@ -212,64 +226,50 @@ namespace ClassLibrary
                 //record the error
                 Error = Error + "The date was not a valid date : ";
             }
-            //is the Order Address blank
-            if (OrderAddress.Length == 0)
-            {
-                //record the error
-                Error = Error + "The address may not be blank : ";
-            }
-            //if the Order Address is too long
-            if (OrderAddress.Length > 9)
-            {
-                //record the error
-                Error = Error + "The address must be less than 9 characters : ";
-            }
-            //is the order return blank
-            if (OrderReturn.Length == 0)
+            //is the post code blank
+            if (orderReturn.Length == 0)
             {
                 //record the error
                 Error = Error + "The order return may not be blank : ";
             }
-            //if the Order return is too long
-            if (OrderReturn.Length > 50)
+            //if the post code is too long
+            if (orderReturn.Length > 9)
             {
                 //record the error
-                Error = Error + "The order return must be less than 50 characters : ";
+                Error = Error + "The order return must be less than 9 characters : ";
             }
-            //is the Order search blank
-            if (OrderSearch.Length == 0)
+            //is the street blank
+            if (orderSearch.Length == 0)
             {
                 //record the error
                 Error = Error + "The search may not be blank : ";
             }
-            //if the Order search is too long
-            if (OrderSearch.Length > 50)
+            //if the street is too long
+            if (orderSearch.Length > 50)
             {
                 //record the error
                 Error = Error + "The search must be less than 50 characters : ";
             }
-            //is the Order delivery blank
-            if (OrderDelivery.Length == 0)
+            //is the town blank
+            if (orderDelivery.Length == 0)
             {
                 //record the error
                 Error = Error + "The delivery may not be blank : ";
             }
-            //if the Order delivery is too long
-            if (OrderDelivery.Length > 50)
+            //if the town is too long
+            if (orderDelivery.Length > 50)
             {
                 //record the error
-                Error = Error + "The delivery must be less than 50 characters : ";
+                Error = Error + "The order must be less than 50 characters : ";
             }
 
-            //return any error
+
+
+
+
+            //return any error messages
             return Error;
+            
         }
-
-       
-
-         
-         
-        
-
     }
 }
