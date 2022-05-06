@@ -43,6 +43,69 @@ public partial class _1_List : System.Web.UI.Page
 
     protected void btnEdit_Click(object sender, EventArgs e)
     {
+        //var to store the primary key value of the record to be edited
+        Int32 customerNo;
+        //if a record has been selected from the list
+        if (lstCustomerList.SelectedIndex != 1)
+        {
+            //get the primary key value of the record to edit
+            customerNo = Convert.ToInt32(lstCustomerList.SelectedValue);
+            //store the data in the session object
+            Session["customerNo"] = customerNo;
+            //redirect to the edit page
+            Response.Redirect("CustomerDataEntry.aspx");
+        }
+        else //if no record has been selected
+        {
+            lblError.Text = "Please select a record to edit from the list";
+        }
+    }
 
+    protected void btnDelete_Click(object sender, EventArgs e)
+    {
+        //var to store the primary key value of the record to be edited
+        Int32 customerNo;
+        //if a record has been selected from the list
+        if (lstCustomerList.SelectedIndex != -1)
+        {
+            //get the primary key value of the record to edit
+            AddressNo = Convert.ToInt32(lstCustomerList.SelectedValue);
+            //store the data in the session object
+            Session["customerNo"] = customerNo;
+            //redirect to the delete page
+            Response.Redirect("CustomerConfirmDelete.aspx");
+        }
+        else//if no record has been selected
+        {
+            lblError.Text = "Please select a record to delete from the list ";
+        }
+    }
+
+    protected void btnApply_Click(object sender, EventArgs e)
+    {
+        //create an instance of the customer collection
+        clsCustomerCollection customers = new clsCustomerCollection();
+        customers.ReportByCustomerName(txtFilter.Text);
+        lstAddressList.DataSource = customers.CustomerList;
+        //set the name of the primary key
+        lstCustomerList.DataValueField = "customerNo";
+        //set the name of the field to display
+        lstCustomerList.DataTextField = "customerName";
+        //bind the data to the list
+        lstCustomerList.DataBind();
+    }
+
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        //create an instance of the customer collection
+        clsCustomerCollection customers = new clsCustomerCollection();
+        customers.ReportByCustomerName(txtFilter.Text);
+        //clear any existing filter to tidy up the interface
+        txtfilter.Text = "";
+        lstCustomerList.DataSource = customers.CustomerList;
+        //set the name of the field to display
+        lstCustomerList.DataTextField = "customerName";
+        //bind the data to the list
+        lstCustomerList.DataBind();
     }
 }
