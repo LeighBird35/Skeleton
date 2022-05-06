@@ -31,15 +31,21 @@ public partial class _1_DataEntry : System.Web.UI.Page
         if (Error == "")
         {
             //capture the data
-            AnCustomer.CustomerName = customerName;
+            AnCustomer.customerName = customerName;
             AnCustomer.customerAddress = customerAddress;
             AnCustomer.creationDate = Convert.ToDateTime(creationDate);
+            AnCustomer.hasAccount = chkhasAccount.Checked;
 
-            //store the customer data in the session object
-            Session["AnCustomer"] = AnCustomer;
+            //create a new instance of the customer collection
+            clsCustomerCollection CustomerList = new clsCustomerCollection();
 
-            //redirect to the viewer page
-            Response.Write("CustomerViewer.aspx");
+            //set the ThisCustomer property
+            CustomerList.ThisCustomer = AnCustomer;
+
+            //add the new record
+            CustomerList.Add();
+            //redirect back to the listpage
+            Response.Redirect("AddressBookList.aspx");
         }
         else
         {
@@ -75,7 +81,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         if (Found == true)
         {
             //display the values of the properties in the form
-            txtcustomerName.Text = AnCustomer.CustomerName;
+            txtcustomerName.Text = AnCustomer.customerName;
             txtcustomerAddress.Text = AnCustomer.customerAddress;
             txtCreationDate.Text = AnCustomer.creationDate.ToString();
             //chkhasAccount = AnCustomer.hasAccount();

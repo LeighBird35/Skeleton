@@ -16,7 +16,7 @@ public partial class _1Viewer : System.Web.UI.Page
         AnCustomer = (clsCustomer)Session["AnCustomer"];
         //display the house number for this entry
         Response.Write(AnCustomer.customerNo);
-        Response.Write(AnCustomer.CustomerName);
+        Response.Write(AnCustomer.customerName);
         Response.Write(AnCustomer.customerAddress);
         Response.Write(AnCustomer.hasAccount);
         Response.Write(AnCustomer.creationDate);

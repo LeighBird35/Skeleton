@@ -47,9 +47,9 @@ namespace Testing2
             //create some test data
             String testData = "Williams, Ash";
             //assign the data to the property
-            AnCustomer.CustomerName = testData;
+            AnCustomer.customerName = testData;
             //test to see if the two values are the same
-            Assert.AreEqual(AnCustomer.CustomerName, testData);
+            Assert.AreEqual(AnCustomer.customerName, testData);
         }
 
         [TestMethod]
@@ -143,7 +143,7 @@ namespace Testing2
             //invoke the method
             Found = AnCustomer.Find(customerNo);
             //check the name
-            if (AnCustomer.CustomerName != Convert.ToString("Ash Williams"))
+            if (AnCustomer.customerName != Convert.ToString("Ash Williams"))
             {
                 OK = false;
             }

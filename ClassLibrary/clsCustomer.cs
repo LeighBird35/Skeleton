@@ -9,30 +9,30 @@ namespace ClassLibrary
             get
             {
                 //this line of code sends data out of the property
-                return mCustomerNo;
+                return mcustomerNo;
             }
 
             set
             {
                 //this line of code allows data into the property
-                mCustomerNo = value;
+                mcustomerNo = value;
             }
         }
 
 
 
-        public string CustomerName
+        public string customerName
         {
             get
             {
                 //this line of code sends data out of the property
-                return mCustomerName;
+                return mcustomerName;
             }
 
             set
             {
                 //this line of code allows data into the property
-                mCustomerName = value;
+                mcustomerName = value;
             }
         }
 
@@ -41,13 +41,13 @@ namespace ClassLibrary
             get
             {
                 //this line of code sends data out of the property
-                return mCustomerAddress;
+                return mcustomerAddress;
             }
 
             set
             {
                 //this line of code allows data into the property
-                mCustomerAddress = value;
+                mcustomerAddress = value;
             }
         }
 
@@ -85,9 +85,9 @@ namespace ClassLibrary
         }
 
         //private data members
-        private Int32 mCustomerNo;
-        private string mCustomerName;
-        private string mCustomerAddress;
+        private Int32 mcustomerNo;
+        private string mcustomerName;
+        private string mcustomerAddress;
         private bool mhasAccount;
         private DateTime mcreationDate;
 
@@ -103,9 +103,9 @@ namespace ClassLibrary
             if (DB.Count == 1)
             {
                 //copy the data from the database to the private data members
-                mCustomerNo = Convert.ToInt32(DB.DataTable.Rows[0]["customerNo"]);
-                mCustomerName = Convert.ToString(DB.DataTable.Rows[0]["customerName"]);
-                mCustomerAddress = Convert.ToString(DB.DataTable.Rows[0]["customerAddress"]);
+                mcustomerNo = Convert.ToInt32(DB.DataTable.Rows[0]["customerNo"]);
+                mcustomerName = Convert.ToString(DB.DataTable.Rows[0]["customerName"]);
+                mcustomerAddress = Convert.ToString(DB.DataTable.Rows[0]["customerAddress"]);
                 mhasAccount = Convert.ToBoolean(DB.DataTable.Rows[0]["hasAccount"]);
                 mcreationDate = Convert.ToDateTime(DB.DataTable.Rows[0]["creationDate"]);
 
