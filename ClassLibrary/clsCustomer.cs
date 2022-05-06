@@ -121,29 +121,13 @@ namespace ClassLibrary
             }
         }
 
-        public string Valid(string customerNo, string customerName, string customerAddress, string hasAccount, string creationDate)
+        public string Valid(string customerName, string customerAddress, string creationDate)
         {
             //create a string variable to store the error
             String Error = "";
 
             //create a temp variable to store date values
             DateTime DateTemp;
-
-            //if the customerNo is blank
-            if (customerNo.Length == 0)
-            {
-                //record the error
-                Error = Error + "The customer no may not be blank: ";
-            }
-
-            //if the customerNo is greater than 6 characters
-            if (customerNo.Length > 6)
-            {
-                //record the error
-                Error = Error + "The customer no must be less than 6 characters : ";
-            }
-
-
 
             try
             {
@@ -168,6 +152,38 @@ namespace ClassLibrary
                 //record the error
                 Error = Error + "That was not a valid date : ";
             }
+
+            //if the customerName is blank
+            if (customerName.Length == 0)
+            {
+                //record the error
+                Error = Error + "The customer name may not be blank: ";
+            }
+
+            //if the customerName is greater than 50 characters
+            if (customerName.Length > 50)
+            {
+                //record the error
+                Error = Error + "The customer name must be less than 50 characters : ";
+            }
+
+            //customerAddress
+
+            //if the customer address is blank
+            if (customerAddress.Length == 0)
+            {
+                //record the error
+                Error = Error + "The customer address may not be blank: ";
+            }
+
+            //if the customer address is greater than 100 characters
+            if (customerAddress.Length > 100)
+            {
+                //record the error
+                Error = Error + "The customer address must be less than 50 characters : ";
+            }
+
+
             //return any error messages
             return Error;
         }

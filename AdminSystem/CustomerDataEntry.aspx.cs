@@ -19,11 +19,37 @@ public partial class _1_DataEntry : System.Web.UI.Page
         clsCustomer AnCustomer = new clsCustomer();
 
         //capture the data
-        AnCustomer.customerNo = Convert.ToInt32(txtcustomerNo.Text);
-        AnCustomer.CustomerName = txtcustomerNo.Text;
-        AnCustomer.customerAddress = txtcustomerAddress.Text;
-        AnCustomer.hasAccount = chkhasAccount.Checked;
-        AnCustomer.creationDate = Convert.ToDateTime(txtCreationDate.Text);
+        string customerName = txtcustomerName.Text;
+        string customerAddress = txtcustomerAddress.Text;
+        string creationDate = txtCreationDate.Text;
+
+        //variable to store any errors
+        string Error = "";
+
+        //validate the data
+        Error = AnCustomer.Valid(customerName, customerAddress, creationDate);
+        if (Error == "")
+        {
+            //capture the data
+            AnCustomer.CustomerName = customerName;
+            AnCustomer.customerAddress = customerAddress;
+            AnCustomer.creationDate = Convert.ToDateTime(creationDate);
+
+            //store the customer data in the session object
+            Session["AnCustomer"] = AnCustomer;
+
+            //redirect to the viewer page
+            Response.Write("CustomerViewer.aspx");
+        }
+        else
+        {
+            //display the error message
+            lblError.Text = Error;
+        }
+
+
+
+
 
 
         //store the customer info in the session object
