@@ -8,31 +8,13 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    Int32 OrderID;
     protected void Page_Load(object sender, EventArgs e)
     {
-            
+
     }
 
-    protected void BtnOK_Click(object sender, EventArgs e)
-    {
-        //create a new instance of clsOrder
-        clsOrder AnOrder = new clsOrder();
-        //capture the order number
-        AnOrder.OrderID = Convert.ToInt32(txtOrderID.Text);
 
-        //capture other order data
-        AnOrder.OrderAddress = txtOrderAddress.Text;
-        AnOrder.OrderReturn = txtOrderReturn.Text;
-        AnOrder.OrderSearch = Convert.ToBoolean(txtOrderSearch.Text);
-        AnOrder.OrderDelivery = Convert.ToBoolean(txtOrderDelivery.Text);
-        AnOrder.OrderDate = Convert.ToDateTime(txtOrderDate.Text);
-
-        //store the order number in the session object
-        Session["AnOrder"] = AnOrder;
-
-        //navigate to the viewer page
-        Response.Redirect("OrderDataEntry.aspx");
-    }
 
     protected void btnFind_Click(object sender, EventArgs e)
     {
@@ -55,8 +37,84 @@ public partial class _1_DataEntry : System.Web.UI.Page
             txtOrderSearch.Text = AnOrder.OrderSearch.ToString();
             txtOrderDelivery.Text = AnOrder.OrderDelivery.ToString();
             txtOrderDate.Text = AnOrder.OrderDate.ToString();
+            
         }
+
+
+
+
     }
 
-  
+    protected void btnOK_Click(object sender, EventArgs e)
+    {
+        //create a new instance of clsOrder
+        clsOrder AnOrder = new clsOrder();
+
+
+        //capture other order data
+        string OrderAddress = txtOrderAddress.Text;
+        string OrderReturn = txtOrderReturn.Text;
+        string OrderSearch = txtOrderSearch.Text;
+        string OrderDelivery = txtOrderDelivery.Text;
+        string OrderDate = txtOrderDate.Text;
+
+        //variable to store any errors
+        string Error = "";
+
+        //validate data
+        Error = AnOrder.Valid(OrderSearch, OrderAddress, OrderReturn, OrderDelivery, OrderDate);
+        if (Error == "")
+        {
+            //capture the primary key
+
+            //capture data
+            AnOrder.OrderSearch = Convert.ToBoolean(OrderSearch);
+            AnOrder.OrderAddress = OrderAddress;
+            AnOrder.OrderReturn = OrderReturn;
+            AnOrder.OrderDelivery = Convert.ToBoolean(OrderDelivery);
+            AnOrder.OrderDate = Convert.ToDateTime(OrderDate);
+            //capture active
+            AnOrder.Active = chkActive.Checked;
+
+            //create new instance of stock collection
+            clsOrderCollection OrderList = new clsOrderCollection();
+            if (OrderID == -1)
+            {
+                //set the ThisOrder property
+                OrderList.ThisOrder = AnOrder;
+                //add new record
+                OrderList.Add();
+            }
+            //otherwise it must be an uodate
+            else
+            {
+                //find the record to update
+                OrderList.ThisOrder.Find(OrderID);
+                //set thsi Order property
+                OrderList.ThisOrder = AnOrder;
+                //update the record
+                OrderList.Update();
+            }
+            //redirect back tot he listpage
+            Response.Redirect("OrderList.aspx");
+        }
+        else
+        {
+            //display the error message
+            lblError.Text = Error;
+        }
+
+
+
+
+
+
+
+
+    }
 }
+
+
+
+
+

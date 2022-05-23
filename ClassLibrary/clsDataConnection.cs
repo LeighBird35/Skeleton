@@ -122,6 +122,11 @@ public class clsDataConnection
         }
     }
 
+    internal void AddParameter(string v, Action<string> reportByOrderAddress)
+    {
+        throw new NotImplementedException();
+    }
+
     private string TrimPath(string OldPath)
     {
         Int32 Posn = 0;
